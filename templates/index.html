@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Desk Learning App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Flask Learning Project</p>
+                <h1>Help Desk Support System</h1>
+                <p class="subtitle">Learn REST APIs, CRUD, sessions, cookies, client-server communication, and Big O.</p>
+            </div>
+            <div id="userBadge" class="user-badge hidden"></div>
+        </header>
+
+        <section id="authSection" class="auth-grid">
+            <article class="panel">
+                <h2>Create account</h2>
+                <p>Register first, then use the login form.</p>
+                <form id="registerForm">
+                    <label>Username
+                        <input id="registerUsername" required autocomplete="username">
+                    </label>
+                    <label>Password
+                        <input id="registerPassword" type="password" required autocomplete="new-password">
+                    </label>
+                    <button type="submit">Register</button>
+                </form>
+                <p id="registerMessage" class="message"></p>
+            </article>
+
+            <article class="panel">
+                <h2>Login</h2>
+                <p>Logging in creates a Flask session for this browser.</p>
+                <form id="loginForm">
+                    <label>Username
+                        <input id="loginUsername" required autocomplete="username">
+                    </label>
+                    <label>Password
+                        <input id="loginPassword" type="password" required autocomplete="current-password">
+                    </label>
+                    <button type="submit">Login</button>
+                </form>
+                <p id="loginMessage" class="message"></p>
+            </article>
+        </section>
+
+        <section id="appSection" class="hidden">
+            <div class="dashboard-actions">
+                <div>
+                    <h2>Support Tickets</h2>
+                    <p>Create and manage help desk requests.</p>
+                </div>
+                <button id="logoutButton" class="secondary">Logout</button>
+            </div>
+
+            <div class="learning-strip">
+                <div><strong>Session:</strong> remembers the logged-in user.</div>
+                <div><strong>Cookie:</strong> remembers the ticket filter preference.</div>
+                <div><strong>O(n):</strong> finding a ticket loops through the list.</div>
+            </div>
+
+            <div class="content-grid">
+                <article class="panel">
+                    <h3>Create Ticket</h3>
+                    <form id="ticketForm">
+                        <label>Title
+                            <input id="ticketTitle" required placeholder="e.g. Cannot access email">
+                        </label>
+                        <label>Category
+                            <select id="ticketCategory" required>
+                                <option value="Account">Account</option>
+                                <option value="Network">Network</option>
+                                <option value="Platform">Platform</option>
+                                <option value="Hardware">Hardware</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </label>
+                        <label>Priority
+                            <select id="ticketPriority" required>
+                                <option value="Low">Low</option>
+                                <option value="Medium" selected>Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </label>
+                        <label>Description
+                            <textarea id="ticketDescription" rows="4" placeholder="Briefly describe the issue"></textarea>
+                        </label>
+                        <button type="submit">Create Ticket</button>
+                    </form>
+                </article>
+
+                <article class="panel">
+                    <div class="filter-row">
+                        <div>
+                            <h3>Ticket List</h3>
+                            <p>The filter below is saved in a cookie.</p>
+                        </div>
+                        <select id="ticketFilter" aria-label="Ticket filter">
+                            <option value="All">All</option>
+                            <option value="Open">Open</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </div>
+                    <div id="ticketList" class="ticket-list"></div>
+                </article>
+            </div>
+
+            <article class="panel inspector-panel">
+                <div class="dashboard-actions">
+                    <div>
+                        <h3>Request Inspector</h3>
+                        <p>See some of the information Flask receives from your browser.</p>
+                    </div>
+                    <button id="inspectButton" class="secondary">Inspect Request</button>
+                </div>
+                <pre id="requestOutput">Click “Inspect Request” to view request data.</pre>
+            </article>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
